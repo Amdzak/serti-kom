@@ -1,27 +1,21 @@
 <?php
 
+use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('arsip');
-});
+Route::get('/',[ArsipController::class,'index']);
+Route::get('/tambah-arsip',[ArsipController::class,'show']);
 
-Route::get('/tambah-arsip', function () {
-    return view('tambah-arsip');
-});
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/tambah-kategori', [KategoriController::class, 'show']);
 
-Route::get('/kategori', function () {
-    return view('kategori');
-});
-
-Route::get('/tambah-kategori', function () {
-    return view('tambah-kategori');
-});
-
-Route::get('/edit-kategori', function () {
-    return view('edit-kategori');
-});
+Route::get('/edit-kategori', [KategoriController::class, 'edit']);
 
 Route::get('/about', function () {
     return view('about');
 });
+
+
+
+

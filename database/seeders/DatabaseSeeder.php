@@ -15,33 +15,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('arsip_surat')->insert(
-            [
-                'nomor_surat' => '123/123/123',
-                'judul' => "hehe",
-                'id_kategori' => 1,
-            ],
-            [
-                'nomor_surat' => '123/123/123',
-                'judul' => "hehe",
-                'id_kategori' => 2,
-            ],
-            [
-                'nomor_surat' => '123/123/123',
-                'judul' => "hehe",
-                'id_kategori' => 3,
-            ],
-        );
-
         DB::table('kategori_surat')->insert(
             [
-                'nama_kategori' => 'Pembangunan Jalan',
-                'keterangan' => "pembangunan jalan di daerah masing masing",
-            ],
-            [
-                'nama_kategori' => 'Renovasi Jalan',
-                'keterangan' => "pembangunan jalan di daerah masing masing",
-            ],
+                [
+                    'nama_kategori' => 'Pembangunan Jalan',
+                    'keterangan' => "pembangunan jalan di daerah masing masing",
+                ],
+                [
+                    'nama_kategori' => 'Renovasi Jalan',
+                    'keterangan' => "pembangunan jalan di daerah masing masing",
+                ]
+            ]
         );
+
+        DB::table('arsip_surat')->insert(
+            [
+                [
+                    'nomor_surat' => '12/22/2',
+                    'judul' => "hehe",
+                    'id_kategori' => 1,
+                ],
+                [
+                    'nomor_surat' => '12/22/4',
+                    'judul' => "hehe",
+                    'id_kategori' => 2,
+                ],
+                [
+                    'nomor_surat' => '12/22/kop',
+                    'judul' => "hehe",
+                    'id_kategori' => 1,
+                ]
+            ]
+        );
+
+        
     }
 }

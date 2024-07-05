@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nomor_surat')->nullable();
             $table->string('judul')->nullable();
-            $table->bigInteger('id_kategori')->unsigned()->nullable();
+            $table->unsignedBigInteger('id_kategori')->nullable();
             $table->string('file')->nullable();
             $table->timestamp('waktu_arsip')->nullable();
             $table->rememberToken();
