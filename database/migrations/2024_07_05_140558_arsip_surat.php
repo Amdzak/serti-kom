@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\KategoriSurat;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nomor_surat')->nullable();
             $table->string('judul')->nullable();
-            $table->integer('id_kategori')->unsigned()->nullable();
+            $table->bigInteger('id_kategori')->unsigned()->nullable();
             $table->string('file')->nullable();
             $table->timestamp('waktu_arsip')->nullable();
             $table->rememberToken();
