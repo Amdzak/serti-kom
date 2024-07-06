@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ArsipSurat;
+use App\Models\KategoriSurat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArsipController extends Controller
 {
@@ -12,7 +14,11 @@ class ArsipController extends Controller
      */
     public function index()
     {
-        return view('arsip');
+        $data = ArsipSurat::with('KategoriSurat')->get();
+        // dd($data);
+        return view('arsip',[
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -28,7 +34,22 @@ class ArsipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nomor_surat' => 'required|unique:arsip_surat',
+        ]);
+
+        if($validated){
+            $surat = new ArsipSurat();
+            $surat->nomor_surat = $request->nomor_surat;
+            $surat->id_kategori = $request->kategori;
+            $surat->judul = $request->judul;
+            $surat->file = $request->file;
+            $surat->waktu_arsip = date('Y-m-d H:i:s');;
+            $surat->save();
+
+            return redirect('/')->with('success','Berhasil menambahkan arsip');
+        }
+        
     }
 
     /**
@@ -36,7 +57,10 @@ class ArsipController extends Controller
      */
     public function show(ArsipSurat $arsipSurat)
     {
-        return view('tambah-arsip');
+        $ketegori = KategoriSurat::with('ArsipSurat')->get();
+        return view('tambah-arsip',[
+            'data' => $ketegori,
+        ]);
     }
 
     /**

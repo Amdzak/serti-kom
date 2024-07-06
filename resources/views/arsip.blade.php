@@ -5,18 +5,6 @@
 
 @section('content')
 
-{{-- <div class="pagetitle">
-    <h1>Arsip Surat</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <p class="breadcrumb-item">
-          Berikut ini adalah surat-surat yang telah terbit dan di arsipkan. <br>
-          Klik "Lihat" pada kolom aksi untuk menampilkan surat.
-        </p>
-      </ol>
-    </nav>
-</div> --}}
-
 <section class="section">
   <div class="row">
     <div class="col-lg-12">
@@ -29,43 +17,41 @@
             Klik "Lihat" pada kolom aksi untuk menampilkan surat.
           </p>
 
+          @if (session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
+
           <!-- Table with stripped rows -->
           <table class="table datatable">
             <thead>
+              {{-- @dd($data) --}}
               <tr>
-                <th>ID Kategori</th>
-                <th>Nama Kategori</th>
+                <th>Nomor Surat</th>
+                <th>Kategori</th>
                 <th>Judul</th>
-                <th>Keterangan</th>
+                <th>Waktu Pengarsipan</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
+              @foreach ($data as $item)
+                  
               <tr>
-                <td>Unity Pugh</td>
-                <td>9958</td>
-                <td>Curicó</td>
-                <td>2005/02/11</td>
+                <td>{{ $item->nomor_surat }}</td>
+                <td>{{ $item->KategoriSurat->nama_kategori }}</td>
+                <td>{{ $item->judul }}</td>
+                <td>{{ $item->waktu_arsip }}</td>
                 <td>
-                  <a href="/hapus" class="btn btn-danger">Hapus</a>
-                  <a href="/edit" class="btn btn-warning">Unduh</a>
-                  <a href="/lihat" class="btn btn-primary">Lihat</a>
+                  <a href="/hapus/{{ $item->id }}" class="btn btn-danger">Hapus</a>
+                  <a href="/edit/{{ $item->id }}" class="btn btn-warning">Unduh</a>
+                  <a href="/lihat/{{ $item->id }}" class="btn btn-primary">Lihat</a>
                 </td>
               </tr>
-              <tr>
-                <td>Theodore Duran</td>
-                <td>8971</td>
-                <td>Dhanbad</td>
-                <td>1999/04/07</td>
-                <td>97%</td>
-              </tr>
-              <tr>
-                <td>Kylie Bishop</td>
-                <td>3147</td>
-                <td>Norman</td>
-                <td>2005/09/08</td>
-                <td>63%</td>
-              </tr>
+              @endforeach
+
             </tbody>
           </table>
           <!-- End Table with stripped rows -->

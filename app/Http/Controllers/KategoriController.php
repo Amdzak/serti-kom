@@ -12,7 +12,10 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('kategori');
+        $data = KategoriSurat::with('ArsipSurat')->get();
+        return view('kategori',[
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -28,7 +31,20 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'judul' => 'required',
+            'nama_kategori' => 'required|unique:kategori_surat',
+        ]);
+
+        if($validated){
+            $kategori = new KategoriSurat();
+            $kategori->nama_kategori = $request->nama_kategori;
+            $kategori->keterangan = $request->judul;
+            $kategori->save();
+    
+            return redirect('/kategori')->with('success','Berhasil menambahkan Kategori');
+        }
+
     }
 
     /**
