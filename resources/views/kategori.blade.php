@@ -54,11 +54,7 @@
                   <td>{{ $item->nama_kategori }}</td>
                   <td>{{ $item->keterangan }}</td>
                   <td>
-<<<<<<< HEAD
                     <a href="/hapus-kategori/{{ $item->id }}" data-confirm-delete="true" class="btn btn-danger">Hapus</a>
-=======
-                    <a href="/hapus/{{ $item->id }}" class="btn btn-danger">Hapus</a>
->>>>>>> 9fef3320644bf063f560db45076b9a0a644bf3e2
                     <a href="/edit-kategori/{{ $item->id }}" class="btn btn-primary">Edit</a>
                   </td>
                 </tr>

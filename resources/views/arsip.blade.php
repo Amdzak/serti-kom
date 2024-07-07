@@ -38,7 +38,6 @@
             </thead>
             <tbody>
               @foreach ($data as $item)
-<<<<<<< HEAD
                   {{-- @dd($item) --}}
               <tr>
                 <td>{{ $item->nomor_surat }}</td>
@@ -53,16 +52,6 @@
                 <td>{{ $item->waktu_arsip }}</td>
                 <td>
                   <a href="/hapus/{{ $item->id }}" data-confirm-delete="true" class="btn btn-danger">Hapus</a>
-=======
-                  
-              <tr>
-                <td>{{ $item->nomor_surat }}</td>
-                <td>{{ $item->KategoriSurat->nama_kategori }}</td>
-                <td>{{ $item->judul }}</td>
-                <td>{{ $item->waktu_arsip }}</td>
-                <td>
-                  <a href="/hapus/{{ $item->id }}" class="btn btn-danger">Hapus</a>
->>>>>>> 9fef3320644bf063f560db45076b9a0a644bf3e2
                   <a href="/edit/{{ $item->id }}" class="btn btn-warning">Unduh</a>
                   <a href="/lihat/{{ $item->id }}" class="btn btn-primary">Lihat</a>
                 </td>
