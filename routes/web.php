@@ -15,7 +15,8 @@ Route::get('/tambah-kategori', [KategoriController::class, 'show']);
 Route::post('/tambah-kategori', [KategoriController::class, 'store']);
 Route::delete('/hapus-kategori/{id}', [KategoriController::class, 'destroy']);
 
-Route::get('/edit-kategori', [KategoriController::class, 'edit']);
+Route::get('/edit-kategori/{id}', [KategoriController::class, 'edit']);
+Route::post('/edit-kategori/{id}', [KategoriController::class, 'update']);
 
 Route::get('/about', function () {
     return view('about');

@@ -64,9 +64,13 @@ class KategoriController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KategoriSurat $kategoriSurat)
+    public function edit($id)
     {
-        return view('edit-kategori');
+        $file = KategoriSurat::findOrFail($id);
+
+        return view('edit-kategori',[
+            'data' => $file,
+        ]);
     }
 
     /**
@@ -74,7 +78,21 @@ class KategoriController extends Controller
      */
     public function update(Request $request, KategoriSurat $kategoriSurat)
     {
-        //
+        $file = KategoriSurat::findOrFail($request->id);
+
+        $validated = $request->validate([
+            'keterangan' => 'required',
+            'nama_kategori' => 'required',
+        ]);
+
+        if($validated){
+            $file->nama_kategori = $request->nama_kategori;
+            $file->keterangan = $request->keterangan;
+            $file->update();
+    
+            return redirect('/kategori')->with('success','Berhasil mengedit Kategori');
+        }
+        
     }
 
     /**
@@ -86,6 +104,6 @@ class KategoriController extends Controller
         // dd($file);
         //delete post
         $file->delete();
-        return redirect('/kategori')->with('success','Berhasil menghapus arsip');
+        return redirect('/kategori')->with('success','Berhasil menghapus Kategori');
     }
 }
