@@ -67,7 +67,11 @@
                     <div class="row mb-3">
                       <label for="inputPassword3" class="col-sm-2 col-form-label">File surat (PDF)</label>
                       <div class="col-sm-10">
+<<<<<<< HEAD
                         <input class="form-control" type="file" name="file" accept=".pdf" id="formFile" required>
+=======
+                        <input class="form-control" type="file" name="file" id="formFile" required>
+>>>>>>> 9fef3320644bf063f560db45076b9a0a644bf3e2
                       </div>
                     </div>
                     <div class="mt-4">
