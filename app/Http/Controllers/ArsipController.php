@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ArsipSurat;
+use App\Models\KategoriSurat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ArsipController extends Controller
 {
@@ -12,7 +15,15 @@ class ArsipController extends Controller
      */
     public function index()
     {
-        return view('arsip');
+        $data = ArsipSurat::with('KategoriSurat')->get();
+        // dd($data);
+        $title = 'Alert!';
+        $text = "Apakah anda yakin ingin menghapus arsip surat ini?";
+        confirmDelete($title, $text);
+        
+        return view('arsip',[
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -28,7 +39,30 @@ class ArsipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nomor_surat' => 'required|unique:arsip_surat',
+            'file' => 'required|mimes:pdf',
+        ]);
+
+        if($validated){
+            date_default_timezone_set('Asia/Jakarta');
+            $file = $request->file('file');
+            $name = date('Ymd- ').'.'.$file->getClientOriginalName();
+            $destinationPath = public_path('/arsip-surat/');
+            $file->move($destinationPath, $name);
+
+            $surat = new ArsipSurat();
+            $surat->nomor_surat = $request->nomor_surat;
+            $surat->id_kategori = $request->kategori;
+            $surat->judul = $request->judul;
+            $surat->file = $name;
+            $surat->waktu_arsip = date('Y-m-d H:i:s');
+            // dd($surat);
+            $surat->save();
+
+            return redirect('/')->with('success','Berhasil menambahkan arsip');
+        }
+        
     }
 
     /**
@@ -36,7 +70,10 @@ class ArsipController extends Controller
      */
     public function show(ArsipSurat $arsipSurat)
     {
-        return view('tambah-arsip');
+        $ketegori = KategoriSurat::with('ArsipSurat')->get();
+        return view('tambah-arsip',[
+            'data' => $ketegori,
+        ]);
     }
 
     /**
@@ -58,8 +95,16 @@ class ArsipController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ArsipSurat $arsipSurat)
+    public function destroy($id)
     {
-        //
+        $file = ArsipSurat::findOrFail($id);
+
+        //delete image
+        Storage::delete('public/arsip-surat/'. $file->file);
+
+        //delete post
+        $file->delete();
+        return redirect('/')->with('success','Berhasil menghapus arsip');
+
     }
 }

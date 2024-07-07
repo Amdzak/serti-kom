@@ -41,6 +41,8 @@
 <body>
 @include('layouts.header')
 
+@include('sweetalert::alert')
+
 @include('layouts.sidebar')
 
   <main id="main" class="main">

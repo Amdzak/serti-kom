@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KategoriSurat extends Model
 {
     use HasFactory;
-    protected $table = 'arsip_surat';
+    protected $table = 'kategori_surat';
 
     public function ArsipSurat(){
         return $this->hasMany(ArsipSurat::class,'id');

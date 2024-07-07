@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('nomor_surat')->nullable();
             $table->string('judul')->nullable();
             $table->unsignedBigInteger('id_kategori')->nullable();
-            $table->string('file')->nullable();
+            $table->text('file')->nullable();
             $table->timestamp('waktu_arsip')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('id_kategori')->references('id')->on('kategori_surat')->onDelete('cascade');
+            $table->foreign('id_kategori')->references('id')->on('kategori_surat')->nullOnDelete();
         });
     }
 
