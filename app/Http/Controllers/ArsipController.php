@@ -87,9 +87,23 @@ class ArsipController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ArsipSurat $arsipSurat)
+    public function download($id)
     {
-        //
+
+        $arsip = ArsipSurat::findOrFail($id);
+
+        // if(!file_exists($arsip->file)){
+        //     return redirect('/')->with('error', 'File tidak ditemukan.');
+        // }
+
+        $filePath = public_path("arsip-surat/" . $arsip->file);
+        // dd(file_exists($filePath));
+        
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            return redirect('/')->with('error', 'File tidak ditemukan.');
+        }
     }
 
     /**

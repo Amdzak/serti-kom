@@ -24,6 +24,13 @@
           </div>
           @endif
 
+          @if (session('error'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
+
           <!-- Table with stripped rows -->
           <table class="table datatable">
             <thead>
@@ -52,8 +59,8 @@
                 <td>{{ $item->waktu_arsip }}</td>
                 <td>
                   <a href="/hapus/{{ $item->id }}" data-confirm-delete="true" class="btn btn-danger">Hapus</a>
-                  <a href="/edit/{{ $item->id }}" class="btn btn-warning">Unduh</a>
-                  <a href="/lihat/{{ $item->id }}" class="btn btn-primary">Lihat</a>
+                  <a href="/unduh/{{ $item->id }}" class="btn btn-warning">Unduh</a>
+                  <a href="/arsip-surat/{{ $item->file }}" target="_blank" class="btn btn-primary">Lihat</a>
                 </td>
               </tr>
               @endforeach

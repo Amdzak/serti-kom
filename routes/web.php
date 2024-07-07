@@ -8,6 +8,7 @@ Route::get('/',[ArsipController::class,'index']);
 Route::get('/tambah-arsip',[ArsipController::class,'show']);
 Route::delete('/hapus/{id}',[ArsipController::class,'destroy']);
 Route::post('/tambah-arsip',[ArsipController::class,'store']);
+Route::get('/unduh/{id}',[ArsipController::class,'download']);
 
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/tambah-kategori', [KategoriController::class, 'show']);
