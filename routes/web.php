@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/',[ArsipController::class,'index']);
 Route::get('/tambah-arsip',[ArsipController::class,'show']);
@@ -20,6 +21,15 @@ Route::post('/edit-kategori/{id}', [KategoriController::class, 'update']);
 
 Route::get('/about', function () {
     return view('about');
+});
+
+Route::get('/print-pdf/{file}', function ($file) {
+    $filePath = public_path('arsip-surat/' . $file);
+    if (file_exists($filePath)) {
+        return view('print-pdf', ['file' => $file]);
+    } else {
+        abort(404, 'File not found');
+    }
 });
 
 

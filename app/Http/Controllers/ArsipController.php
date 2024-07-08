@@ -91,18 +91,14 @@ class ArsipController extends Controller
     {
 
         $arsip = ArsipSurat::findOrFail($id);
-
-        // if(!file_exists($arsip->file)){
-        //     return redirect('/')->with('error', 'File tidak ditemukan.');
-        // }
-
         $filePath = public_path("arsip-surat/" . $arsip->file);
         // dd(file_exists($filePath));
         
         if (file_exists($filePath)) {
             return response()->download($filePath);
         } else {
-            return redirect('/')->with('error', 'File tidak ditemukan.');
+            // return redirect('/')->with('error', 'File tidak ditemukan.');
+            return response()->json(['error' => 'File tidak ditemukan.'], 404);
         }
     }
 

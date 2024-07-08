@@ -34,7 +34,6 @@
           <!-- Table with stripped rows -->
           <table class="table datatable">
             <thead>
-              {{-- @dd($data) --}}
               <tr>
                 <th>Nomor Surat</th>
                 <th>Kategori</th>
@@ -45,7 +44,6 @@
             </thead>
             <tbody>
               @foreach ($data as $item)
-                  {{-- @dd($item) --}}
               <tr>
                 <td>{{ $item->nomor_surat }}</td>
                 <td>
@@ -60,6 +58,7 @@
                 <td>
                   <a href="/hapus/{{ $item->id }}" data-confirm-delete="true" class="btn btn-danger">Hapus</a>
                   <a href="/unduh/{{ $item->id }}" class="btn btn-warning">Unduh</a>
+                  {{-- <a href="javascript:void(0);" class="btn btn-warning" onclick="printFile('{{ $item->file }}')">Unduh</a> --}}
                   <a href="/arsip-surat/{{ $item->file }}" target="_blank" class="btn btn-primary">Lihat</a>
                 </td>
               </tr>
@@ -77,5 +76,46 @@
     </div>
   </div>
 </section>
+
+{{-- <script>
+function printFile(fileName) {
+    const url = `/print-pdf/${fileName}`;
+    const printWindow = window.open(url, '_blank');
+
+    // if (printWindow) {
+    //         // Menanggapi pesan dari jendela cetak
+    //         window.addEventListener('message', function(event) {
+    //             if (event.origin === window.location.origin) {
+    //                 const status = event.data;
+    //                 if (status === 'selesai') {
+    //                     // Pencetakan selesai, lakukan sesuatu jika diperlukan
+    //                     console.log('Pencetakan selesai');
+    //                 } else if (status === 'batal') {
+    //                     // Pencetakan dibatalkan, lakukan sesuatu jika diperlukan
+    //                     console.log('Pencetakan dibatalkan');
+    //                 }
+    //                 // Tutup jendela cetak
+    //                 printWindow.close();
+    //             }
+    //         });
+    //     } else {
+    //         alert('Gagal membuka jendela cetak. Pastikan pop-up tidak diblokir.');
+    //     }
+
+    if (printWindow) {
+        printWindow.onload = function() {
+            printWindow.print();
+            printWindow.onfocus = function(){window.close();}
+            // Jendela cetak tetap terbuka untuk memungkinkan pengguna memilih opsi "Batal" atau "OK"
+        };
+    } else {
+        alert('Gagal membuka jendela cetak. Pastikan pop-up tidak diblokir.');
+    }
+    printWindow.onload = function() {
+        printWindow.print();
+        // printWindow.close();
+    };
+}
+</script> --}}
 
 @endsection
