@@ -38,8 +38,6 @@
             <div class="card">
               <div class="card-body">
 
-                {{-- @dd($data) --}}
-  
                 <!-- Vertical Form -->
                 <form action="/edit-arsip/{{ $data[0]->id }}" method="POST" enctype="multipart/form-data">
                   @csrf
@@ -55,7 +53,9 @@
                         <select id="inputState" name="kategori" required class="form-select">
                           <option selected value="{{ $data[0]->id_kategori }}">{{ $data[0]->KategoriSurat->nama_kategori }}</option>
                           @foreach ($items as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                            @if ($item->id != $data[0]->id_kategori)
+                              <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                            @endif
                           @endforeach
                         </select>
                       </div>
@@ -69,12 +69,12 @@
                     <div class="row mb-3">
                       <label for="inputPassword3" class="col-sm-2 col-form-label">File surat (PDF)</label>
                       <div class="col-sm-10">
-                        <input class="form-control" type="file" name="file" accept=".pdf" id="formFile" >
+                        <input class="form-control" type="file" name="file" accept=".pdf" id="formFile">
                       </div>
                     </div>
                     <div class="mt-4">
                       <a href="/" class="btn btn-warning"><i class="ri-arrow-drop-left-line"></i> Kembali</a>
-                      <button type="submit" class="btn btn-primary ">Simpan</button>
+                      <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                   </form><!-- End Horizontal Form -->
               </div>

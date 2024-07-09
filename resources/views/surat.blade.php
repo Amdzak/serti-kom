@@ -15,7 +15,7 @@
           <p>Nomor : {{ $data[0]->nomor_surat }}</p>
           <p>Kategori : {{ $data[0]->KategoriSurat->nama_kategori }}</p>
           <p>Judul : {{ $data[0]->judul }}</p>
-          <p>Waktu : {{ $data[0]->waktu_arsip }}</p>
+          <p>Waktu Unggah: {{ $data[0]->waktu_arsip }}</p>
 
           <div class="col-lg-10 mb-3">
 
