@@ -22,31 +22,12 @@ class DatabaseSeeder extends Seeder
                     'keterangan' => "pembangunan jalan di daerah masing masing",
                 ],
                 [
-                    'nama_kategori' => 'Renovasi Jalan',
-                    'keterangan' => "pembangunan jalan di daerah masing masing",
+                    'nama_kategori' => 'Asuransi Kendaraan',
+                    'keterangan' => "Asuransi untuk kendaraan umum",
                 ]
             ]
         );
 
-        DB::table('arsip_surat')->insert(
-            [
-                [
-                    'nomor_surat' => '12/22/2',
-                    'judul' => "hehe",
-                    'id_kategori' => 1,
-                ],
-                [
-                    'nomor_surat' => '12/22/4',
-                    'judul' => "hehe",
-                    'id_kategori' => 2,
-                ],
-                [
-                    'nomor_surat' => '12/22/kop',
-                    'judul' => "hehe",
-                    'id_kategori' => 1,
-                ]
-            ]
-        );
 
         
     }

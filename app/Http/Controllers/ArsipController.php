@@ -29,9 +29,35 @@ class ArsipController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id,Request $request)
     {
-        //
+        $surat = ArsipSurat::findOrFail($id);
+
+        $validated = $request->validate([
+            'nomor_surat' => 'required',
+            'file' => 'mimes:pdf',
+        ]);
+
+        if($validated){
+            date_default_timezone_set('Asia/Jakarta');
+
+            if($request->hasFile('file')){
+                $file = $request->file('file');
+                $name = time().'.'.$file->getClientOriginalName();
+                $destinationPath = public_path('/arsip-surat/');
+                $file->move($destinationPath, $name);
+                $surat->file = $name;
+            }
+            
+            $surat->nomor_surat = $request->nomor_surat;
+            $surat->id_kategori = $request->kategori;
+            $surat->judul = $request->judul;
+            $surat->waktu_arsip = date('Y-m-d H:i:s');
+            // dd($surat);
+            $surat->update();
+
+            return redirect('/')->with('success','Berhasil mengedit arsip');
+        }
     }
 
     /**
@@ -76,12 +102,30 @@ class ArsipController extends Controller
         ]);
     }
 
+    public function lihat($id)
+    {
+        $arsip = ArsipSurat::with('KategoriSurat')->where('id',$id)->get();
+        // $ketegori = KategoriSurat::with('ArsipSurat')->get();
+
+
+        return view('surat',[
+            'data' => $arsip,
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ArsipSurat $arsipSurat)
+    public function edit($id)
     {
-        //
+        $arsip = ArsipSurat::with('KategoriSurat')->where('id',$id)->get();
+
+        
+        return view('edit-arsip',[
+            'data' => $arsip,
+            'items' => KategoriSurat::with('ArsipSurat')->get(),
+
+        ]);
     }
 
     /**

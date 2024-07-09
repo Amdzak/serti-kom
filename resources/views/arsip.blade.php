@@ -59,7 +59,7 @@
                   <a href="/hapus/{{ $item->id }}" data-confirm-delete="true" class="btn btn-danger">Hapus</a>
                   <a href="/unduh/{{ $item->id }}" class="btn btn-warning">Unduh</a>
                   {{-- <a href="javascript:void(0);" class="btn btn-warning" onclick="printFile('{{ $item->file }}')">Unduh</a> --}}
-                  <a href="/arsip-surat/{{ $item->file }}" target="_blank" class="btn btn-primary">Lihat</a>
+                  <a href="/surat/{{ $item->id }}" class="btn btn-primary">Lihat</a>
                 </td>
               </tr>
               @endforeach
